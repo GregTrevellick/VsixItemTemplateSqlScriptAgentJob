@@ -7,6 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VsixSequelAgentJobTemplate"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VsixSequelAgentJob", "VsixSequelAgentJob\VsixSequelAgentJob.csproj", "{D315FC5A-6E4C-4572-AFE9-CE19259E946C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B3C7E1C1-A09F-4495-ACC4-F3FD2CC10CA2}"
+	ProjectSection(SolutionItems) = preProject
+		..\TODO.txt = ..\TODO.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

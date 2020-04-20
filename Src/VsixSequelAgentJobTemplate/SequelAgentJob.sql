@@ -1,5 +1,5 @@
 ﻿begin tran
 
-print 'abc';
+print 'if not exists create blank, then update';
 
 rollback tran
