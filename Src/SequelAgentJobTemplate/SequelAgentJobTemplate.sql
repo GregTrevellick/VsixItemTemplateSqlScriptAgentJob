@@ -1,10 +1,7 @@
-﻿--WARNING! ERRORS ENCOUNTERED DURING SQL PARSING!
-BEGIN TRANSACTION
+﻿BEGIN TRANSACTION
 
 DECLARE @ReturnCode INT
-
 SELECT @ReturnCode = 0
-
 DECLARE @UncategorizedLocal VARCHAR(30) = N '[Uncategorized (Local)]';
 
 --
@@ -20,16 +17,13 @@ BEGIN
 	EXEC @ReturnCode = msdb.dbo.sp_add_category @class = N 'JOB'
 		,@type = N 'LOCAL'
 		,@name = @UncategorizedLocal
-
-	IF (
-			@@ERROR <> 0
-			OR @ReturnCode <> 0
-			)
+	IF (@@ERROR <> 0 OR @ReturnCode <> 0)
 		GOTO QuitWithRollback
-END --
-		-- Initialise variables
-		--
+END 
 
+--
+-- Initialise variables
+--
 DECLARE @command VARCHAR(255);
 DECLARE @databaseName VARCHAR(255) = '#{Hades}OmitSquareBrackets';
 DECLARE @envChannel VARCHAR(255) = REPLACE(@databaseName, 'Hades', '');
@@ -63,14 +57,13 @@ BEGIN
 		,@owner_login_name = N 'sa'
 		,@job_id = @jobId OUTPUT
 
-	IF (
-			@@ERROR <> 0
-			OR @ReturnCode <> 0
-			)
+	IF (@@ERROR <> 0 OR @ReturnCode <> 0)
 		GOTO QuitWithRollback
-END --
-		-- Add job step(s) if does not exist
-		--            
+END
+
+--
+-- Add job step(s) if does not exist
+--            
 
 SET @command = N 'EXEC DimensionsSync_SyncAll';
 SET @stepId = 1;
@@ -94,10 +87,7 @@ BEGIN
 		,@database_name = @databaseName
 		,@flags = 0
 
-	IF (
-			@@ERROR <> 0
-			OR @ReturnCode <> 0
-			)
+	IF (@@ERROR <> 0 OR @ReturnCode <> 0)
 		GOTO QuitWithRollback
 END
 ELSE
@@ -120,10 +110,7 @@ BEGIN
 		,@database_name = @databaseName
 		,@flags = 0
 
-	IF (
-			@@ERROR <> 0
-			OR @ReturnCode <> 0
-			)
+	IF (@@ERROR <> 0 OR @ReturnCode <> 0)
 		GOTO QuitWithRollback
 END
 
@@ -149,10 +136,7 @@ BEGIN
 		,@database_name = @databaseName
 		,@flags = 0
 
-	IF (
-			@@ERROR <> 0
-			OR @ReturnCode <> 0
-			)
+	IF (@@ERROR <> 0 OR @ReturnCode <> 0)
 		GOTO QuitWithRollback
 END
 ELSE
@@ -175,60 +159,50 @@ BEGIN
 		,@database_name = @databaseName
 		,@flags = 0
 
-	IF (
-			@@ERROR <> 0
-			OR @ReturnCode <> 0
-			)
+	IF (@@ERROR <> 0 OR @ReturnCode <> 0)
 		GOTO QuitWithRollback
-END --
-		-- Set job start step id (not sure if truly needed but when scripting out an existing job this always appears)
-		--
+END 
 
+--
+-- Set job start step id (not sure if truly needed but when scripting out an existing job this always appears)
+--
 EXEC @ReturnCode = msdb.dbo.sp_update_job @job_id = @jobId
 	,@start_step_id = 1
 
-IF (
-		@@ERROR <> 0
-		OR @ReturnCode <> 0
-		)
-	GOTO QuitWithRollback --Schedules should be set up manually, hence commented out below.
-		--This avoids shared schedule id's across environments / channels.
-		--Also means we can create the job in an enabled state if we want, without the job automatically running potentially against our will.
-		--EXEC @ReturnCode = msdb.dbo.sp_add_jobschedule @job_id=@jobId, @name=@scheduleName,
-		--                             @enabled=1,  /* NOTE: 0=DISabled, 1=ENabled */
-		--                             @freq_type=4,
-		--                             @freq_interval=1,
-		--                             @freq_subday_type=4,
-		--                             @freq_subday_interval=5,
-		--                             @freq_relative_interval=0,
-		--                             @freq_recurrence_factor=0,
-		--                             @active_start_date=20191024, /* If copying this file for another agent job use a new date here */
-		--                             @active_end_date=99991231,
-		--                             @active_start_time=0,
-		--                             @active_end_time=235959,
-		--                             @schedule_uid=N'addd36db-7433-4010-ab08-d3825c280078' /* If copying this file for another agent job use a new guid here */
-		--IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
-		--
-		-- sp_add_jobserver (not sure what this does, but when scripting out an existing job this always appears)
-		--
+IF (@@ERROR <> 0 OR @ReturnCode <> 0)
+	GOTO QuitWithRollback 
+	
+	--Schedules should be set up manually, hence commented out below.
+	--This avoids shared schedule id's across environments / channels.
+	--Also means we can create the job in an enabled state if we want, without the job automatically running potentially against our will.
+	--EXEC @ReturnCode = msdb.dbo.sp_add_jobschedule @job_id=@jobId, @name=@scheduleName,
+	--                             @enabled=1,  /* NOTE: 0=DISabled, 1=ENabled */
+	--                             @freq_type=4,
+	--                             @freq_interval=1,
+	--                             @freq_subday_type=4,
+	--                             @freq_subday_interval=5,
+	--                             @freq_relative_interval=0,
+	--                             @freq_recurrence_factor=0,
+	--                             @active_start_date=20191024, /* If copying this file for another agent job use a new date here */
+	--                             @active_end_date=99991231,
+	--                             @active_start_time=0,
+	--                             @active_end_time=235959,
+	--                             @schedule_uid=N'addd36db-7433-4010-ab08-d3825c280078' /* If copying this file for another agent job use a new guid here */
+	--IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
+	--
+	-- sp_add_jobserver (not sure what this does, but when scripting out an existing job this always appears)
+	--
 
 BEGIN TRY
 	EXEC @ReturnCode = msdb.dbo.sp_add_jobserver @job_id = @jobId
 		,@server_name = N '(local)'
 
-	IF (
-			@@ERROR <> 0
-			OR @ReturnCode <> 0
-			)
+	IF (@@ERROR <> 0 OR @ReturnCode <> 0)
 		GOTO QuitWithRollback
 END TRY
 
 BEGIN CATCH -- Ignore error 14269 ("Job 'xxxxx' is already targeted at server 'MB-SQL-X-XX'")
-	IF (
-			(
-				SELECT ERROR_NUMBER() AS ErrorNumber
-				) <> 14269
-			)
+	IF ((SELECT ERROR_NUMBER() AS ErrorNumber) <> 14269)
 	BEGIN
 		GOTO QuitWithRollback
 	END
@@ -236,8 +210,11 @@ END CATCH;
 
 COMMIT TRANSACTION
 
-GOTO EndSave QuitWithRollback :
+GOTO EndSave 
 
+QuitWithRollback:
 IF (@@TRANCOUNT > 0)
-	ROLLBACK TRANSACTION EndSave :
-	GO
+	ROLLBACK TRANSACTION 
+	
+EndSave:
+GO
