@@ -4,11 +4,11 @@ using System.Threading;
 using Microsoft.VisualStudio.Shell;
 using Task = System.Threading.Tasks.Task;
 
-namespace SequelAgentJob.VsixPackage
+namespace SequelAgentJobItemTemplate.VsixPackage
 {
     [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
-    [Guid(SequelAgentJobVsixPackage.PackageGuidString)]
-    public sealed class SequelAgentJobVsixPackage : AsyncPackage
+    [Guid(VsixPackage.PackageGuidString)]
+    public sealed class VsixPackage : AsyncPackage
     {
         public const string PackageGuidString = "f016edd0-faa5-4ee8-9088-705389659b8d";
 

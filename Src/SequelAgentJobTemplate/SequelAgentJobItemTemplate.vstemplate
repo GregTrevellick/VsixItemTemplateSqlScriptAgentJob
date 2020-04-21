@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <VSTemplate Version="3.0.0" Type="Item" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:sdk="http://schemas.microsoft.com/developer/vstemplate-sdkextension/2010">
   <TemplateData>
-    <Name>Sequel Agent Job</Name>
-    <Description>Sequel Agent Job create / update script</Description>
-    <Icon>SequelAgentJobTemplate.ico</Icon>
+    <Name>Sequel Agent Job item template</Name>
+    <Description>Sequel Agent Job item template create / update script</Description>
+    <Icon>SequelAgentJobItemTemplate.ico</Icon>
     <TemplateID>50ff8065-716f-4581-8e6d-2aebe7044f55</TemplateID>
     <ProjectType>CSharp</ProjectType>
     <RequiredFrameworkVersion>2.0</RequiredFrameworkVersion>
     <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
-    <DefaultName>SequelAgentJobTemplate.sql</DefaultName>
+    <DefaultName>SequelAgentJobItemTemplate.sql</DefaultName>
   </TemplateData>
   <TemplateContent>
     <References>
@@ -16,6 +16,6 @@
         <Assembly>System</Assembly>
       </Reference>
     </References>
-    <ProjectItem ReplaceParameters="true">SequelAgentJobTemplate.sql</ProjectItem>
+    <ProjectItem ReplaceParameters="true">SequelAgentJobItemTemplate.sql</ProjectItem>
   </TemplateContent>
 </VSTemplate>
