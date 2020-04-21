@@ -61,7 +61,7 @@
     <None Include="SequelAgentJobTemplate.ico" />
   </ItemGroup>
   <ItemGroup>
-    <VSTemplate Include="VsixSequelAgentJobTemplate.vstemplate" />
+    <VSTemplate Include="SequelAgentJobTemplate.vstemplate" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\VSSDK\Microsoft.VsSDK.targets" Condition="'$(VSToolsPath)' != ''" />

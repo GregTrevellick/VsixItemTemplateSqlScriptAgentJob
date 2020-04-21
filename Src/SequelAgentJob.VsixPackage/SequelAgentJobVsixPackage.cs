@@ -7,8 +7,8 @@ using Task = System.Threading.Tasks.Task;
 namespace SequelAgentJob.VsixPackage
 {
     [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
-    [Guid(VsixSequelAgentJobPackage.PackageGuidString)]
-    public sealed class VsixSequelAgentJobPackage : AsyncPackage
+    [Guid(SequelAgentJobVsixPackage.PackageGuidString)]
+    public sealed class SequelAgentJobVsixPackage : AsyncPackage
     {
         public const string PackageGuidString = "f016edd0-faa5-4ee8-9088-705389659b8d";
 
