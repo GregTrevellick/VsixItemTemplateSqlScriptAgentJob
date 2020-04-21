@@ -34,54 +34,7 @@ DECLARE @command VARCHAR(255);
 DECLARE @databaseName VARCHAR(255) = '#{Hades}OmitSquareBrackets';
 DECLARE @envChannel VARCHAR(255) = REPLACE(@databaseName, 'Hades', '');
 DECLARE @jobId BINARY (16);
-DECLARE @jobNamePrefix VARCHAR(255) = CASE @envChannel
-		WHEN 'Dev'
-			THEN 'Primary Dev'
-		WHEN 'DevSecondary'
-			THEN 'Secondary Dev'
-		WHEN 'DevTertiary'
-			THEN 'Tertiary Dev'
-		WHEN 'DevQuaternary'
-			THEN 'Quaternary Dev'
-		WHEN 'DevQuinary'
-			THEN 'Quinary Dev'
-		WHEN 'Test'
-			THEN 'Primary Test'
-		WHEN 'TestSecondary'
-			THEN 'Secondary Test'
-		WHEN 'TestTertiary'
-			THEN 'Tertiary Test'
-		WHEN 'TestQuaternary'
-			THEN 'Quaternary Test'
-		WHEN 'TestQuinary'
-			THEN 'Quinary Test'
-		WHEN 'UAT'
-			THEN 'Primary UAT'
-		WHEN 'UATSecondary'
-			THEN 'Secondary UAT'
-		WHEN 'UATTertiary'
-			THEN 'Tertiary UAT'
-		WHEN 'UATQuaternary'
-			THEN 'Quaternary UAT'
-		WHEN 'UATQuinary'
-			THEN 'Quinary UAT'
-		WHEN 'Training'
-			THEN 'Primary Training'
-		WHEN 'TrainingSecondary'
-			THEN 'Secondary Training'
-		WHEN 'TrainingTertiary'
-			THEN 'Tertiary Training'
-		WHEN 'TrainingQuaternary'
-			THEN 'Quaternary Training'
-		WHEN 'TrainingQuinary'
-			THEN 'Quinary Training'
-		WHEN 'Hotfix'
-			THEN 'Hotfix'
-		WHEN 'Next'
-			THEN 'Next' --This line should never be needed
-		WHEN ''
-			THEN '' --Production
-		END;
+DECLARE @jobNamePrefix VARCHAR(255) = 'Primary Dev';
 DECLARE @jobName VARCHAR(255) = @jobNamePrefix + N ' Hades - Updater of things';
 DECLARE @scheduleName VARCHAR(255) = N 'Schedule-' + @jobName;
 DECLARE @stepId VARCHAR(255);
