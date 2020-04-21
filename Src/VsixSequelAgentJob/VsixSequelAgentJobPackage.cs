@@ -4,7 +4,7 @@ using System.Threading;
 using Microsoft.VisualStudio.Shell;
 using Task = System.Threading.Tasks.Task;
 
-namespace VsixSequelAgentJob
+namespace SequelAgentJob.VsixPackage
 {
     [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
     [Guid(VsixSequelAgentJobPackage.PackageGuidString)]

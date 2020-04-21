@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("VsixSequelAgentJob")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("SequelAgentJob.VsixPackage")]
+[assembly: AssemblyDescription("SequelAgentJob.VsixPackage package")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("VsixSequelAgentJob")]
-[assembly: AssemblyCopyright("")]
+[assembly: AssemblyCompany("Greg Trevellick")]
+[assembly: AssemblyProduct("SequelAgentJob.VsixPackage")]
+[assembly: AssemblyCopyright("Greg Trevellick 2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
