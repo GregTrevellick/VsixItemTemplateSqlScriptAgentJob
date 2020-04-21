@@ -61,7 +61,7 @@
     <PackageReference Include="Microsoft.VSSDK.BuildTools" Version="16.5.2047" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SequelAgentJobTemplate\SequelAgentJobItemTemplate.csproj">
+    <ProjectReference Include="..\SequelAgentJobItemTemplate\SequelAgentJobItemTemplate.csproj">
       <Project>{DEFEA701-42CE-425C-A3CD-EA2D5262CBE1}</Project>
       <Name>SequelAgentJobItemTemplate</Name>
       <VSIXSubPath>ItemTemplates</VSIXSubPath>
