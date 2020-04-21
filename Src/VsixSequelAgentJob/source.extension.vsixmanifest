@@ -4,15 +4,22 @@
         <Identity Id="9f34112b-335b-42b7-bf85-32e3a3591307" Version="1.0" Language="en-US" Publisher="Greg Trevellick" />
         <DisplayName>Sequel Agent Job</DisplayName>
         <Description xml:space="preserve">Template for creating / updating a sequel agent job</Description>
+        <MoreInfo>https://github.com/GregTrevellick/VstsDashboardWidgetProjectTemplate</MoreInfo>
+        <License>LICENSE.txt</License>
+        <GettingStartedGuide>https://docs.microsoft.com/en-us/vsts/extend/?view=vsts</GettingStartedGuide>
+        <ReleaseNotes>https://github.com/GregTrevellick/VstsDashboardWidgetProjectTemplate/blob/master/CHANGELOG.md</ReleaseNotes>
+        <Icon>Resources\VsixExtensionPreview_90x90.png</Icon>
+        <PreviewImage>Resources\VsixExtensionPreview_175x175.png</PreviewImage>
+        <Tags>tfs; vsts; azure dev ops; azure devops; ado; visual studio team services; dashboard; widget; dashboard widget; template; project template; vsix; extensibility;</Tags>        
     </Metadata>
     <Installation>
-        <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[16.0, 17.0)" />
+        <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[15.0, 17.0)" />
     </Installation>
     <Dependencies>
         <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.5,)" />
     </Dependencies>
     <Prerequisites>
-        <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[16.0,17.0)" DisplayName="Visual Studio core editor" />
+        <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[15.0,17.0)" DisplayName="Visual Studio core editor" />
     </Prerequisites>
     <Assets>
         <Asset Type="Microsoft.VisualStudio.VsPackage" d:Source="Project" d:ProjectName="%CurrentProject%" Path="|%CurrentProject%;PkgdefProjectOutputGroup|" />
