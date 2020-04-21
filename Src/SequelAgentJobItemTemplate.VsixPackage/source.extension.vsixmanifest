@@ -5,6 +5,7 @@
         <DisplayName>Sequel Agent Job Item Template</DisplayName>
         <Description xml:space="preserve">Template for creating / updating a sequel agent job</Description>
         <MoreInfo>https://github.com/GregTrevellick/VsixSequelAgentJobItemTemplate</MoreInfo>
+        <License>LICENSE.txt</License>
         <GettingStartedGuide>https://github.com/GregTrevellick/VsixSequelAgentJobItemTemplate</GettingStartedGuide>
         <Icon>Resources\VsixExtensionPreview_90x90.png</Icon>
         <PreviewImage>Resources\VsixExtensionPreview_175x175.png</PreviewImage>

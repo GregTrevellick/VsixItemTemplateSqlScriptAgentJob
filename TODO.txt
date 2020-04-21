@@ -1,9 +1,10 @@
-source.extension.vsixmanifest content
-readme content
 icons
-appveyor
-sonar
 mads k - keep things in sync
+LOW source.extension.vsixmanifest content
+LOW readme content
+LOW appveyor
+LOW sonar
+LOW all badges
 
 
 
