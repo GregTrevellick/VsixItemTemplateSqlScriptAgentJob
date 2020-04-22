@@ -1,4 +1,42 @@
-﻿BEGIN TRANSACTION
+﻿IF EXISTS
+(
+    SELECT *
+    FROM sys.objects
+    WHERE object_id = OBJECT_ID(N'fnDoesJobStepExist')
+)
+BEGIN
+    DROP FUNCTION fnDoesJobStepExist;
+END;
+GO
+ 
+ 
+CREATE FUNCTION [dbo].fnDoesJobStepExist
+(
+                @jobName VARCHAR(255),
+                @stepId VARCHAR(255)
+)
+RETURNS BIT
+BEGIN
+   DECLARE @output BIT;
+                IF EXISTS
+                               (SELECT 1
+                              FROM [msdb].[dbo].[sysjobs] a WITH(NOLOCK)
+                               INNER JOIN [msdb].[dbo].[sysjobsteps] b WITH(NOLOCK) ON a.job_id = b.job_id
+                               WHERE a.[Name] = @jobName and b.step_id = @stepId)
+               BEGIN
+                              SET @output = 1;
+               END
+               ELSE
+               BEGIN
+                               SET @output = 0;
+                END
+    RETURN @output;
+END;
+
+
+
+
+BEGIN TRANSACTION
 
 	DECLARE @ReturnCode INT
 	SELECT @ReturnCode = 0
