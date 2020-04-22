@@ -4,9 +4,9 @@
         <Identity Id="9f34112b-335b-42b7-bf85-32e3a3591307" Version="1.0" Language="en-US" Publisher="Greg Trevellick" />
         <DisplayName>Sequel Agent Job Item Template</DisplayName>
         <Description xml:space="preserve">Template for creating / updating a sequel agent job</Description>
-        <MoreInfo>https://github.com/GregTrevellick/VsixSequelAgentJobItemTemplate</MoreInfo>
+        <MoreInfo>https://github.com/GregTrevellick/VsixItemTemplateSqlScriptAgentJob</MoreInfo>
         <License>LICENSE.txt</License>
-        <GettingStartedGuide>https://github.com/GregTrevellick/VsixSequelAgentJobItemTemplate</GettingStartedGuide>
+        <GettingStartedGuide>https://github.com/GregTrevellick/VsixItemTemplateSqlScriptAgentJob</GettingStartedGuide>
         <Icon>Resources\VsixExtensionPreview_90x90.png</Icon>
         <PreviewImage>Resources\VsixExtensionPreview_175x175.png</PreviewImage>
         <Tags>tfs; vsts; azure dev ops;</Tags>

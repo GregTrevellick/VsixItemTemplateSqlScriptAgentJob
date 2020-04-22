@@ -1,5 +1,5 @@
-[GitHubRepoURL]: https://github.com/GregTrevellick/VsixSequelAgentJobItemTemplate
-[GitHubRepoIssuesURL]: https://github.com/GregTrevellick/VsixSequelAgentJobItemTemplate/issues
+[GitHubRepoURL]: https://github.com/GregTrevellick/VsixItemTemplateSqlScriptAgentJob
+[GitHubRepoIssuesURL]: https://github.com/GregTrevellick/VsixItemTemplateSqlScriptAgentJob/issues
 [VisualStudioURL]: https://www.visualstudio.com/
 
 # Visual Studio Sequel Agent Job Item Template
@@ -13,7 +13,7 @@
 
 <!--VSMM readme start-->
 
-[GitHubRepoPullRequestsURL]: https://github.com/GregTrevellick/VsixSequelAgentJobItemTemplate/pulls
+[GitHubRepoPullRequestsURL]: https://github.com/GregTrevellick/VsixItemTemplateSqlScriptAgentJob/pulls
 
 A Visual Studio item template sequel script for SQL ageent jobs.
 
@@ -23,11 +23,11 @@ Contributions welcome [here][GitHubRepoPullRequestsURL].
 
 Add the template...
 
-![](https://github.com/GregTrevellick/VsixSequelAgentJobItemTemplate/blob/master/Src/WidgetTemplate.VsixPackage/Resources/screen0.png?raw=true)
+![](https://github.com/GregTrevellick/VsixItemTemplateSqlScriptAgentJob/blob/master/Src/WidgetTemplate.VsixPackage/Resources/screen0.png?raw=true)
 
 ...here's what you get:
 
-![](https://github.com/GregTrevellick/VsixSequelAgentJobItemTemplate/blob/master/Src/WidgetTemplate.VsixPackage/Resources/screen1.png?raw=true)
+![](https://github.com/GregTrevellick/VsixItemTemplateSqlScriptAgentJob/blob/master/Src/WidgetTemplate.VsixPackage/Resources/screen1.png?raw=true)
 
 <!--VSMM readme end-->
 
