@@ -2,8 +2,8 @@
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
         <Identity Id="9f34112b-335b-42b7-bf85-32e3a3591307" Version="1.0" Language="en-US" Publisher="Greg Trevellick" />
-        <DisplayName>Sequel Agent Job Item Template</DisplayName>
-        <Description xml:space="preserve">Template for creating / updating a sequel agent job</Description>
+        <DisplayName>Sequel Script Template for Agent Job</DisplayName>
+        <Description xml:space="preserve">Template for sql script for creating / updating a sequel agent job</Description>
         <MoreInfo>https://github.com/GregTrevellick/VsixItemTemplateSqlScriptAgentJob</MoreInfo>
         <License>LICENSE.txt</License>
         <GettingStartedGuide>https://github.com/GregTrevellick/VsixItemTemplateSqlScriptAgentJob</GettingStartedGuide>

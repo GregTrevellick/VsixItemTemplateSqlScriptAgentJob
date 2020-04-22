@@ -10,7 +10,7 @@ LOW all badges
 
 
 
-VsixSequelAgentJobTemplate.vstemplate remove reference to System assembly ?
+.vstemplate remove reference to System assembly ?
 
 https://docs.microsoft.com/en-us/visualstudio/extensibility/creating-custom-project-and-item-templates?view=vs-2019#create-an-item-template
 

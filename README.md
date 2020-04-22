@@ -2,7 +2,7 @@
 [GitHubRepoIssuesURL]: https://github.com/GregTrevellick/VsixItemTemplateSqlScriptAgentJob/issues
 [VisualStudioURL]: https://www.visualstudio.com/
 
-# Visual Studio Sequel Agent Job Item Template
+# Visual Studio Item Template - Sequel Script - Agent Job 
 
 <!--BadgesSTART-->
 <!-- Powered by https://github.com/GregTrevellick/ReadMeSynchronizer -->
