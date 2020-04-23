@@ -1,7 +1,4 @@
-LOW icons
-mads k - keep things in sync
-LOW source.extension.vsixmanifest content
-LOW readme content
+github readme
 LOW appveyor
 LOW sonar
 LOW all badges
@@ -12,6 +9,6 @@ LOW all badges
 
 .vstemplate remove reference to System assembly ?
 
-https://docs.microsoft.com/en-us/visualstudio/extensibility/creating-custom-project-and-item-templates?view=vs-2019#create-an-item-template
+//https://docs.microsoft.com/en-us/visualstudio/extensibility/creating-custom-project-and-item-templates?view=vs-2019#create-an-item-template
 //https://docs.microsoft.com/en-us/visualstudio/ide/template-tags?view=vs-2019
-https://docs.microsoft.com/en-us/visualstudio/extensibility/visual-studio-template-schema-reference?view=vs-2019
+//https://docs.microsoft.com/en-us/visualstudio/extensibility/visual-studio-template-schema-reference?view=vs-2019
