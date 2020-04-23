@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <VSTemplate Version="3.0.0" Type="Item" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:sdk="http://schemas.microsoft.com/developer/vstemplate-sdkextension/2010">
   <TemplateData>
-    <Name>Sequel Agent Job script</Name>
-    <Description>A template sql script for creating / updating a sequel agent job</Description>
+    <Name>SQL Server Agent Job Script</Name>
+    <Description>A template SQL Server script for creating / updating an agent job</Description>
     <Icon>ItemTemplate.ico</Icon>
     <TemplateID>50ff8065-716f-4581-8e6d-2aebe7044f55</TemplateID>
     <ProjectType>CSharp</ProjectType>
-	  <ProjectSubType>Database</ProjectSubType>
-	  <RequiredFrameworkVersion>2.0</RequiredFrameworkVersion>
+	<ProjectSubType>Database</ProjectSubType>
+	<RequiredFrameworkVersion>2.0</RequiredFrameworkVersion>
     <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
     <DefaultName>AgentJob.sql</DefaultName>
   </TemplateData>
