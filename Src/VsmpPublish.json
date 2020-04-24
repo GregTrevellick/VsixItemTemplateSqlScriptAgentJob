@@ -11,8 +11,7 @@
     }
   ],
   "categories": [
-    "other templates",
-    "visual studio extensions"
+    "templates"
   ],
   "identity": {
     "internalName": "ItemTemplateSqlScriptAgentJob"
