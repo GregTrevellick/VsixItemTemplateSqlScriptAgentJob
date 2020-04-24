@@ -7,8 +7,8 @@
         <MoreInfo>https://github.com/GregTrevellick/VsixItemTemplateSqlScriptAgentJob</MoreInfo>
         <License>LICENSE.txt</License>
         <GettingStartedGuide>https://github.com/GregTrevellick/VsixItemTemplateSqlScriptAgentJob</GettingStartedGuide>
-        <Icon>Resources\VsixExtensionPreview_90x90.png</Icon>
-        <PreviewImage>Resources\VsixExtensionPreview_175x175.png</PreviewImage>
+        <Icon>Resources\VsixExtensionPreview_IncludeInVsix_90x90.png</Icon>
+        <PreviewImage>Resources\VsixExtensionPreview_IncludeInVsix_175x175.png</PreviewImage>
         <Tags>sql; tsql; sequel; sql server; sequel server; database; script; sql script; sequel script; agent job; agent;</Tags>
     </Metadata>
     <Installation>
