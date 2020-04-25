@@ -12,8 +12,8 @@
     <ProjectGuid>{DEFEA701-42CE-425C-A3CD-EA2D5262CBE1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>VsixSequelAgentJobTemplate</RootNamespace>
-    <AssemblyName>VsixSequelAgentJobTemplate</AssemblyName>
+    <RootNamespace>ItemTemplate</RootNamespace>
+    <AssemblyName>ItemTemplate</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <GeneratePkgDefFile>false</GeneratePkgDefFile>
