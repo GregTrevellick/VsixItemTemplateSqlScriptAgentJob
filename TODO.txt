@@ -1,11 +1,8 @@
-github readme
-LOW appveyor
-LOW sonar
-LOW all badges
+badges
+appveyor
+sonar
 
-
-
-
+publish sproc / func / table / view / synonym   first
 
 
 //https://docs.microsoft.com/en-us/visualstudio/extensibility/creating-custom-project-and-item-templates?view=vs-2019#create-an-item-template
