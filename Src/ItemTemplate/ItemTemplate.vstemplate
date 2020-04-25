@@ -6,7 +6,6 @@
     <Icon>ItemTemplate.ico</Icon>
     <TemplateID>50ff8065-716f-4581-8e6d-2aebe7044f55</TemplateID>
     <ProjectType>CSharp</ProjectType>
-	<ProjectSubType>Database</ProjectSubType>
 	<RequiredFrameworkVersion>2.0</RequiredFrameworkVersion>
     <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
     <DefaultName>AgentJob.sql</DefaultName>
