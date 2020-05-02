@@ -9,35 +9,28 @@
 	DECLARE @command VARCHAR(255);                           --gregt nvarchar(max) ????
 	DECLARE @databaseName VARCHAR(255) = N'MyDb';
 	DECLARE @jobId BINARY (16);
-
-
 	DECLARE @jobName VARCHAR(255) = N'MyJobName' + '_' + @databaseName;
-
 	DECLARE @stepId VARCHAR(255);
 	DECLARE @stepName VARCHAR(255);
 
 	--            
 	--Create job (albeit empty) if not exists
 	--
-	SELECT @jobId = job_id
-	FROM msdb.dbo.sysjobs
-	WHERE [name] = @jobName
-
+	SELECT @jobId = job_id  FROM msdb.dbo.sysjobs WHERE [name] = @jobName
 	IF (@jobId IS NULL)
 	BEGIN
 		EXEC @ReturnCode = msdb.dbo.sp_add_job 
-			 @job_name = @jobName
+			 @description = N'My job description'
 			,@enabled = 1 /* NOTE: 0=DISabled, 1=ENabled */
-			,@description = N'My job description'
-			,@owner_login_name = N'sa'
 			,@job_id = @jobId OUTPUT
+			,@job_name = @jobName
+			,@owner_login_name = N'sa'
 		IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
 	END
 
 	--
 	-- Add job step(s) if does not exist
 	--            
-
 	SET @command = N'--My first sequel statement e.g. EXEC MyFirstSproc';
 	SET @stepId = 1;
 	SET @stepName = N'My first step';
@@ -48,25 +41,25 @@
 		WHERE a.[Name] = @jobName and b.step_id = @stepId)
 	BEGIN
 		EXEC @ReturnCode = msdb.dbo.sp_add_jobstep 
-			 @job_id = @jobId
-			,@step_id = @stepId
-			,@step_name = @stepName
-			,@on_success_action = 3
-			,@command = @command
+			 @command = @command
 			,@database_name = @databaseName
 			,@flags = 0
+			,@job_id = @jobId
+			,@on_success_action = 3
+			,@step_id = @stepId
+			,@step_name = @stepName
 		IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
 	END
 	ELSE
 	BEGIN
 		EXEC msdb.dbo.sp_update_jobstep 
-			 @job_id = @jobId
-			,@step_id = @stepId	--The parameters below are an exact copy of those used in sp_add_jobstep above
-			,@step_name = @stepName
-			,@on_success_action = 3 --gregt dedupe
-			,@command = @command
+			 @command = @command
 			,@database_name = @databaseName
 			,@flags = 0
+			,@job_id = @jobId
+			,@on_success_action = 3 --gregt dedupe
+			,@step_id = @stepId	
+			,@step_name = @stepName
 		IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
 	END
 
@@ -83,23 +76,23 @@
 		WHERE a.[Name] = @jobName and b.step_id = @stepId)
 	BEGIN
 		EXEC @ReturnCode = msdb.dbo.sp_add_jobstep 
-			 @job_id = @jobId
-			,@step_id = @stepId
-			,@step_name = @stepName
-			,@command = @command
+			 @command = @command
 			,@database_name = @databaseName
 			,@flags = 0
+			,@job_id = @jobId
+			,@step_id = @stepId
+			,@step_name = @stepName
 		IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
 	END
 	ELSE
 	BEGIN
 		EXEC msdb.dbo.sp_update_jobstep 
-			 @job_id = @jobId
-			,@step_id = @stepId	--The parameters below are an exact copy of those used in sp_add_jobstep above
-			,@step_name = @stepName
-			,@command = @command
+			 @command = @command
 			,@database_name = @databaseName
 			,@flags = 0
+			,@job_id = @jobId
+			,@step_id = @stepId	--The parameters below are an exact copy of those used in sp_add_jobstep above
+			,@step_name = @stepName
 		IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
 	END 
 
