@@ -6,11 +6,10 @@
 	DECLARE @jobId BINARY (16);
 	DECLARE @jobName VARCHAR(255) = N'MyJobName' + '_' + @databaseName;
 	DECLARE @ReturnCode INT = 0;
-	------------------------------------SELECT @ReturnCode = 0
 	DECLARE @stepId VARCHAR(255);
 	DECLARE @stepName VARCHAR(255);
        
-	-- Create empty job (see also https://docs.microsoft.com/en-us/sql/ssms/agent/create-a-job)
+	-- Create empty job (https://docs.microsoft.com/en-us/sql/ssms/agent/create-a-job)
 	SELECT @jobId = job_id FROM msdb.dbo.sysjobs WHERE [name] = @jobName
 	IF (@jobId IS NULL)
 	BEGIN
@@ -20,10 +19,12 @@
 			,@job_id = @jobId OUTPUT
 			,@job_name = @jobName
 			,@owner_login_name = N'sa'
+		-- Add target server (https://docs.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/sp-add-jobserver-transact-sql)
+		EXEC @ReturnCode = msdb.dbo.sp_add_jobserver @job_id = @jobId, @server_name = N'(local)'
 		IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
 	END
 
-	-- Add job steps (see also https://docs.microsoft.com/en-us/sql/ssms/agent/create-a-transact-sql-job-step)
+	-- Add job steps (https://docs.microsoft.com/en-us/sql/ssms/agent/create-a-transact-sql-job-step)
 	SET @command = N'--My first sequel statement e.g. EXEC MyFirstSproc';
 	SET @stepId = 1;
 	SET @stepName = N'My first step';
@@ -87,25 +88,17 @@
 		IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
 	END 
 
-
-
-	
-	--target local sderver
-
-	-- sp_add_jobserver (not sure what this does, but when scripting out an existing job this always appears)
-	------gregt try without this bit & see what happens....
-	------------BEGIN TRY
-	------------	EXEC @ReturnCode = msdb.dbo.sp_add_jobserver @job_id = @jobId
-	------------		,@server_name = N'(local)'
-	------------	IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
-	------------END TRY
-	-----
-	------------BEGIN CATCH -- Ignore error 14269 ("Job 'xxxxx' is already targeted at server 'MB-SQL-X-XX'")
-	------------	IF ((SELECT ERROR_NUMBER() AS ErrorNumber) <> 14269)
-	------------	BEGIN
-	------------		GOTO QuitWithRollback
-	------------	END
-	------------END CATCH;
+	------Set target server to local (can be a remote server if you like)
+	------BEGIN TRY
+	------	EXEC @ReturnCode = msdb.dbo.sp_add_jobserver @job_id = @jobId, @server_name = N'(local)'
+	------	IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
+	------END TRY
+	------BEGIN CATCH -- Ignore error 14269 ("Job 'xxxxx' is already targeted at server 'MB-SQL-X-XX'")
+	------	IF ((SELECT ERROR_NUMBER() AS ErrorNumber) <> 14269)
+	------	BEGIN
+	------		GOTO QuitWithRollback
+	------	END
+	------END CATCH;
 
 COMMIT TRANSACTION
 GOTO EndSave 
