@@ -88,17 +88,17 @@
 		IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
 	END 
 
-	------Set target server to local (can be a remote server if you like)
-	------BEGIN TRY
-	------	EXEC @ReturnCode = msdb.dbo.sp_add_jobserver @job_id = @jobId, @server_name = N'(local)'
-	------	IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
-	------END TRY
-	------BEGIN CATCH -- Ignore error 14269 ("Job 'xxxxx' is already targeted at server 'MB-SQL-X-XX'")
-	------	IF ((SELECT ERROR_NUMBER() AS ErrorNumber) <> 14269)
-	------	BEGIN
-	------		GOTO QuitWithRollback
-	------	END
-	------END CATCH;
+	--------------------------------------------------------------Set target server to local (can be a remote server if you like)
+	--------------------------------------------------------------BEGIN TRY
+	--------------------------------------------------------------	EXEC @ReturnCode = msdb.dbo.sp_add_jobserver @job_id = @jobId, @server_name = N'(local)'
+	--------------------------------------------------------------	IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
+	--------------------------------------------------------------END TRY
+	--------------------------------------------------------------BEGIN CATCH -- Ignore error 14269 ("Job 'xxxxx' is already targeted at server 'MB-SQL-X-XX'")
+	--------------------------------------------------------------	IF ((SELECT ERROR_NUMBER() AS ErrorNumber) <> 14269)
+	--------------------------------------------------------------	BEGIN
+	--------------------------------------------------------------		GOTO QuitWithRollback
+	--------------------------------------------------------------	END
+	--------------------------------------------------------------END CATCH;
 
 COMMIT TRANSACTION
 GOTO EndSave 
@@ -107,4 +107,4 @@ QuitWithRollback:
 IF (@@TRANCOUNT > 0) ROLLBACK TRANSACTION 
 	
 EndSave:
-------GO
+--------------------------------------------------------------------GO
