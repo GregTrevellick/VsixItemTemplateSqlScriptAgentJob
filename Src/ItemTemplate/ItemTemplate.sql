@@ -38,7 +38,6 @@
 		EXEC @ReturnCode = msdb.dbo.sp_add_jobstep 
 				 @command = @command
 				,@database_name = @databaseName
-				,@flags = 0--gregt is this the defualt?
 				,@job_id = @jobId
 				,@on_success_action = 3
 				,@step_id = @stepId
@@ -50,7 +49,6 @@
 		EXEC @ReturnCode = msdb.dbo.sp_update_jobstep 
 				 @command = @command
 				,@database_name = @databaseName
-				,@flags = 0--gregt is this the defualt?
 				,@job_id = @jobId
 				,@on_success_action = 3 --gregt dedupe
 				,@step_id = @stepId	
@@ -71,7 +69,6 @@
 		EXEC @ReturnCode = msdb.dbo.sp_add_jobstep 
 				 @command = @command
 				,@database_name = @databaseName
-				,@flags = 0--gregt is this the defualt?
 				,@job_id = @jobId
 				,@step_id = @stepId
 				,@step_name = @stepName
@@ -82,24 +79,11 @@
 		EXEC @ReturnCode = msdb.dbo.sp_update_jobstep 
 				 @command = @command
 				,@database_name = @databaseName
-				,@flags = 0--gregt is this the defualt?
 				,@job_id = @jobId
 				,@step_id = @stepId	--The parameters below are an exact copy of those used in sp_add_jobstep above
 				,@step_name = @stepName
 		IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
 	END 
-
-	--------------------------------------------------------------Set target server to local (can be a remote server if you like)
-	--------------------------------------------------------------BEGIN TRY
-	--------------------------------------------------------------	EXEC @ReturnCode = msdb.dbo.sp_add_jobserver @job_id = @jobId, @server_name = N'(local)'
-	--------------------------------------------------------------	IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
-	--------------------------------------------------------------END TRY
-	--------------------------------------------------------------BEGIN CATCH -- Ignore error 14269 ("Job 'xxxxx' is already targeted at server 'MB-SQL-X-XX'")
-	--------------------------------------------------------------	IF ((SELECT ERROR_NUMBER() AS ErrorNumber) <> 14269)
-	--------------------------------------------------------------	BEGIN
-	--------------------------------------------------------------		GOTO QuitWithRollback
-	--------------------------------------------------------------	END
-	--------------------------------------------------------------END CATCH;
 
 COMMIT TRANSACTION
 GOTO EndSave 
@@ -108,4 +92,3 @@ QuitWithRollback:
 IF (@@TRANCOUNT > 0) ROLLBACK TRANSACTION 
 	
 EndSave:
---------------------------------------------------------------------GO
