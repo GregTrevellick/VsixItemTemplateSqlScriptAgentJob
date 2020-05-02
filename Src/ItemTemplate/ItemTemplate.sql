@@ -1,6 +1,7 @@
 ﻿BEGIN TRANSACTION
 
 	-- Variables
+	--gregt make variables start with a capital
 	DECLARE @command VARCHAR(255);                           --gregt nvarchar(max) ????
 	DECLARE @databaseName VARCHAR(255) = N'MyDb';
 	DECLARE @jobId BINARY (16);
@@ -37,7 +38,7 @@
 		EXEC @ReturnCode = msdb.dbo.sp_add_jobstep 
 				 @command = @command
 				,@database_name = @databaseName
-				,@flags = 0
+				,@flags = 0--gregt is this the defualt?
 				,@job_id = @jobId
 				,@on_success_action = 3
 				,@step_id = @stepId
@@ -49,7 +50,7 @@
 		EXEC @ReturnCode = msdb.dbo.sp_update_jobstep 
 				 @command = @command
 				,@database_name = @databaseName
-				,@flags = 0
+				,@flags = 0--gregt is this the defualt?
 				,@job_id = @jobId
 				,@on_success_action = 3 --gregt dedupe
 				,@step_id = @stepId	
@@ -70,7 +71,7 @@
 		EXEC @ReturnCode = msdb.dbo.sp_add_jobstep 
 				 @command = @command
 				,@database_name = @databaseName
-				,@flags = 0
+				,@flags = 0--gregt is this the defualt?
 				,@job_id = @jobId
 				,@step_id = @stepId
 				,@step_name = @stepName
@@ -81,7 +82,7 @@
 		EXEC @ReturnCode = msdb.dbo.sp_update_jobstep 
 				 @command = @command
 				,@database_name = @databaseName
-				,@flags = 0
+				,@flags = 0--gregt is this the defualt?
 				,@job_id = @jobId
 				,@step_id = @stepId	--The parameters below are an exact copy of those used in sp_add_jobstep above
 				,@step_name = @stepName
