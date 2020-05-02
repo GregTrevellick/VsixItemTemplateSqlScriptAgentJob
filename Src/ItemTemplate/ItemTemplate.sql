@@ -89,14 +89,8 @@
 
 
 
-	-- Set job start step id (not sure if truly needed but when scripting out an existing job this always appears)
-	------gregt try without this bit & see what happens....
-	------EXEC @ReturnCode = msdb.dbo.sp_update_job 
-	------@job_id = @jobId
-	------	,@start_step_id = 1
-	------IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback 
 	
-	
+	--target local sderver
 
 	-- sp_add_jobserver (not sure what this does, but when scripting out an existing job this always appears)
 	------gregt try without this bit & see what happens....
