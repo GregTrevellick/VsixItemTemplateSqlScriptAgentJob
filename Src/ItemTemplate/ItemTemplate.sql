@@ -1,12 +1,11 @@
 ﻿BEGIN TRANSACTION
 
-	-- Variables
+	-- Variables  gregt sort alpha
 	DECLARE @Command NVARCHAR(MAX);
 	DECLARE @DatabaseName SYSNAME = N'MyDatabase';
 	DECLARE @JobDescription nvarchar(512) =  N'My job description';
 	DECLARE @JobId UNIQUEIDENTIFIER;
 	DECLARE @JobName SYSNAME = N'MyJobName' + '_' + @DatabaseName;
-	DECLARE @JobStepExists NVARCHAR(MAX) = N'SELECT 1 FROM msdb.dbo.sysjobs j WITH(NOLOCK) INNER JOIN msdb.dbo.sysjobsteps s WITH(NOLOCK) ON j.job_id = s.job_id WHERE j.[Name] = @JobName AND s.step_id = @StepId';
     DECLARE @OnSuccessActionGoToNextStep TINYINT = 3;
     DECLARE @onSuccessActionQuitJobReportingSuccess TINYINT = 1;--gregt check text and value
 	DECLARE @OwnerLoginName SYSNAME = N'sa';
@@ -14,6 +13,9 @@
 	DECLARE @ServerName NVARCHAR(30) = N'(local)';
 	DECLARE @StepId INT;
 	DECLARE @StepName SYSNAME;
+	DECLARE	@Count BIGINT;
+	DECLARE @JobStepExistsSql NVARCHAR(MAX) = N'SELECT @Count = COUNT(*) FROM msdb.dbo.sysjobs j WITH(NOLOCK) INNER JOIN msdb.dbo.sysjobsteps s WITH(NOLOCK) ON j.job_id = s.job_id WHERE j.[Name] = ''' + @JobName + N''' AND s.step_id = @StepId';
+
 
 	-- Create job (https://docs.microsoft.com/en-us/sql/ssms/agent/create-a-job)
 	SELECT @JobId = job_id FROM msdb.dbo.sysjobs WHERE [name] = @JobName
@@ -38,8 +40,8 @@
 	SET @Command = N'EXEC MySproc';
 	SET @StepId = 1;
 	SET @StepName = N'MySproc';
-	--IF NOT EXISTS (SELECT 1 FROM msdb.dbo.sysjobs j WITH(NOLOCK) INNER JOIN msdb.dbo.sysjobsteps s WITH(NOLOCK) ON j.job_id = s.job_id WHERE j.[Name] = @JobName AND s.step_id = @StepId)
-	IF NOT EXISTS (SELECT 1 = EXEC @JobStepExists)
+	EXEC sp_executesql @JobStepExistsSql, N'@Count BIGINT OUTPUT, @StepId INT', @Count = @Count OUTPUT, @StepId = @StepId
+	IF (@Count = 0)
 	BEGIN
 		-- Add step https://docs.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/sp-add-jobstep-transact-sql
 		EXEC @ReturnCode = msdb.dbo.sp_add_jobstep 
@@ -68,8 +70,8 @@
 	SET @Command = N'EXEC MyLastSproc';
 	SET @StepId = 2;
 	SET @StepName = N'MyLastSproc';
-	--IF NOT EXISTS (SELECT 1	FROM msdb.dbo.sysjobs j WITH(NOLOCK) INNER JOIN msdb.dbo.sysjobsteps s WITH(NOLOCK) ON j.job_id = s.job_id WHERE j.[Name] = @JobName AND s.step_id = @StepId)
-	IF NOT EXISTS (EXEC @JobStepExists)
+	EXEC sp_executesql @JobStepExistsSql, N'@Count BIGINT OUTPUT, @StepId INT', @Count = @Count OUTPUT, @StepId = @StepId
+	IF (@Count = 0)
 	BEGIN
 		-- Add step (https://docs.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/sp-add-jobstep-transact-sql)
 		EXEC @ReturnCode = msdb.dbo.sp_add_jobstep 
