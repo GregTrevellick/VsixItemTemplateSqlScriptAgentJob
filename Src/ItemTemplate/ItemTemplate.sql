@@ -20,7 +20,7 @@
 		-- Add job (https://docs.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/sp-add-job-transact-sql)
 		EXEC @ReturnCode = msdb.dbo.sp_add_job 
 				 @description = @JobDescription
-				--,@enabled = 0 -- Uncomment to create job in disabled state
+				,@enabled = 1 -- 1=enabled, 0=disabled
 				,@job_id = @JobId OUTPUT
 				,@job_name = @JobName
 				,@owner_login_name = @OwnerLoginName
