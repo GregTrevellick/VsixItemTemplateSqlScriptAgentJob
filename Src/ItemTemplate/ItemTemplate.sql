@@ -2,19 +2,19 @@
 
 	-- Variables  gregt sort alpha
 	DECLARE @Command NVARCHAR(MAX);
+	DECLARE	@Count BIGINT;--gregt rename to @Exists ?
 	DECLARE @DatabaseName SYSNAME = N'MyDatabase';
-	DECLARE @JobDescription nvarchar(512) =  N'My job description';
+	DECLARE @JobDescription nvarchar(512) =  N'My job description';--gregt lorem ipsum
 	DECLARE @JobId UNIQUEIDENTIFIER;
 	DECLARE @JobName SYSNAME = N'MyJobName' + '_' + @DatabaseName;
-    DECLARE @OnSuccessActionGoToNextStep TINYINT = 3;
-    DECLARE @onSuccessActionQuitJobReportingSuccess TINYINT = 1;--gregt check text and value
+	DECLARE @JobStepExistsSql NVARCHAR(MAX) = N'SELECT @Count = COUNT(*) FROM msdb.dbo.sysjobs j WITH(NOLOCK) INNER JOIN msdb.dbo.sysjobsteps s WITH(NOLOCK) ON j.job_id = s.job_id WHERE j.[Name] = ''' + @JobName + N''' AND s.step_id = @StepId';
+    DECLARE @OnSuccessActionGoToNextStep TINYINT = 3;--gregt shorten name
+    DECLARE @OnSuccessActionQuitJobReportingSuccess TINYINT = 1;--gregt shorten name
 	DECLARE @OwnerLoginName SYSNAME = N'sa';
 	DECLARE @ReturnCode INT = 0;
 	DECLARE @ServerName NVARCHAR(30) = N'(local)';
 	DECLARE @StepId INT;
 	DECLARE @StepName SYSNAME;
-	DECLARE	@Count BIGINT;--gregt rename to @Exists ?
-	DECLARE @JobStepExistsSql NVARCHAR(MAX) = N'SELECT @Count = COUNT(*) FROM msdb.dbo.sysjobs j WITH(NOLOCK) INNER JOIN msdb.dbo.sysjobsteps s WITH(NOLOCK) ON j.job_id = s.job_id WHERE j.[Name] = ''' + @JobName + N''' AND s.step_id = @StepId';
 
 
 	-- Create job (https://docs.microsoft.com/en-us/sql/ssms/agent/create-a-job)
@@ -39,7 +39,7 @@
 	-- Create first job step https://docs.microsoft.com/en-us/sql/ssms/agent/create-a-transact-sql-job-step
 	SET @Command = N'EXEC MySproc';
 	SET @StepId = 1;
-	SET @StepName = N'MySproc';
+	SET @StepName = N'MySproc';--gregt lorem ipsum
 	EXEC sp_executesql @JobStepExistsSql, N'@Count BIGINT OUTPUT, @StepId INT', @Count = @Count OUTPUT, @StepId = @StepId
 	IF (@Count = 0)
 	BEGIN
@@ -48,7 +48,7 @@
 				 @Command = @Command
 				,@database_name = @DatabaseName
 				,@job_id = @JobId
-				,@on_success_action = @onSuccessActionGoToNextStep
+				,@on_success_action = @OnSuccessActionGoToNextStep
 				,@step_id = @StepId
 				,@step_name = @StepName
 		IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
@@ -60,7 +60,7 @@
 				 @Command = @Command
 				,@database_name = @DatabaseName
 				,@job_id = @JobId
-				,@on_success_action = @onSuccessActionGoToNextStep
+				,@on_success_action = @OnSuccessActionGoToNextStep
 				,@step_id = @StepId	
 				,@step_name = @StepName
 		IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
@@ -69,7 +69,7 @@
 	-- Create last job step https://docs.microsoft.com/en-us/sql/ssms/agent/create-a-transact-sql-job-step	
 	SET @Command = N'EXEC MyLastSproc';
 	SET @StepId = 2;
-	SET @StepName = N'MyLastSproc';
+	SET @StepName = N'MyLastSproc';--gregt lorem ipsum
 	EXEC sp_executesql @JobStepExistsSql, N'@Count BIGINT OUTPUT, @StepId INT', @Count = @Count OUTPUT, @StepId = @StepId
 	IF (@Count = 0)
 	BEGIN
@@ -78,7 +78,7 @@
 				 @Command = @Command
 				,@database_name = @DatabaseName
 				,@job_id = @JobId
-				,@on_success_action = @onSuccessActionQuitJobReportingSuccess
+				,@on_success_action = @OnSuccessActionQuitJobReportingSuccess
 				,@step_id = @StepId
 				,@step_name = @StepName
 		IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
@@ -90,7 +90,7 @@
 				 @Command = @Command
 				,@database_name = @DatabaseName
 				,@job_id = @JobId
-				,@on_success_action = @onSuccessActionQuitJobReportingSuccess
+				,@on_success_action = @OnSuccessActionQuitJobReportingSuccess
 				,@step_id = @StepId	
 				,@step_name = @StepName
 		IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
