@@ -6,6 +6,7 @@
 	DECLARE @JobDescription nvarchar(512) =  N'My job description';
 	DECLARE @JobId UNIQUEIDENTIFIER;
 	DECLARE @JobName SYSNAME = N'MyJobName' + '_' + @DatabaseName;
+	DECLARE @JobStepExists NVARCHAR(MAX) = N'SELECT 1 FROM msdb.dbo.sysjobs j WITH(NOLOCK) INNER JOIN msdb.dbo.sysjobsteps s WITH(NOLOCK) ON j.job_id = s.job_id WHERE j.[Name] = @JobName AND s.step_id = @StepId';
     DECLARE @OnSuccessActionGoToNextStep TINYINT = 3;
     DECLARE @onSuccessActionQuitJobReportingSuccess TINYINT = 1;--gregt check text and value
 	DECLARE @OwnerLoginName SYSNAME = N'sa';
@@ -37,11 +38,8 @@
 	SET @Command = N'EXEC MySproc';
 	SET @StepId = 1;
 	SET @StepName = N'MySproc';
-	IF NOT EXISTS 
-		(SELECT 1
-		FROM msdb.dbo.sysjobs j WITH(NOLOCK)
-		INNER JOIN msdb.dbo.sysjobsteps s WITH(NOLOCK) ON j.job_id = s.job_id 
-		WHERE j.[Name] = @JobName and s.step_id = @StepId)
+	--IF NOT EXISTS (SELECT 1 FROM msdb.dbo.sysjobs j WITH(NOLOCK) INNER JOIN msdb.dbo.sysjobsteps s WITH(NOLOCK) ON j.job_id = s.job_id WHERE j.[Name] = @JobName AND s.step_id = @StepId)
+	IF NOT EXISTS (SELECT 1 = EXEC @JobStepExists)
 	BEGIN
 		-- Add step https://docs.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/sp-add-jobstep-transact-sql
 		EXEC @ReturnCode = msdb.dbo.sp_add_jobstep 
@@ -70,11 +68,8 @@
 	SET @Command = N'EXEC MyLastSproc';
 	SET @StepId = 2;
 	SET @StepName = N'MyLastSproc';
-	IF NOT EXISTS 
-		(SELECT 1
-		FROM msdb.dbo.sysjobs j WITH(NOLOCK)
-		INNER JOIN msdb.dbo.sysjobsteps s WITH(NOLOCK) ON j.job_id = s.job_id 
-		WHERE j.[Name] = @JobName and s.step_id = @StepId)
+	--IF NOT EXISTS (SELECT 1	FROM msdb.dbo.sysjobs j WITH(NOLOCK) INNER JOIN msdb.dbo.sysjobsteps s WITH(NOLOCK) ON j.job_id = s.job_id WHERE j.[Name] = @JobName AND s.step_id = @StepId)
+	IF NOT EXISTS (EXEC @JobStepExists)
 	BEGIN
 		-- Add step (https://docs.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/sp-add-jobstep-transact-sql)
 		EXEC @ReturnCode = msdb.dbo.sp_add_jobstep 
