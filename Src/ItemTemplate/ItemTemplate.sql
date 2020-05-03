@@ -4,7 +4,7 @@
 	DECLARE @Command NVARCHAR(MAX);
 	DECLARE	@Count BIGINT;
 	DECLARE @DatabaseName SYSNAME = N'MyDatabase';
-	DECLARE @JobDescription nvarchar(512) =  N'My job description';--gregt lorem ipsum
+	DECLARE @JobDescription nvarchar(512) =  N'Job name e.g. Lorem ipsum dolor sit amet';
 	DECLARE @JobId UNIQUEIDENTIFIER;
 	DECLARE @JobName SYSNAME = N'MyJobName' + '_' + @DatabaseName;
 	DECLARE	@JobStepExists BIGINT;
@@ -37,9 +37,9 @@
 	END
 
 	-- Create first job step https://docs.microsoft.com/en-us/sql/ssms/agent/create-a-transact-sql-job-step
-	SET @Command = N'EXEC MySproc';
+	SET @Command = N'Your step 1 sequel here';
 	SET @StepId = 1;
-	SET @StepName = N'MySproc';--gregt lorem ipsum
+	SET @StepName = N'Step 1 name e.g. Lorem ipsum dolor sit amet';
 	EXEC sp_executesql @JobStepExistsSql, N'@Count BIGINT OUTPUT, @StepId INT', @JobStepExists = @Count OUTPUT, @StepId = @StepId
 	IF (@JobStepExists = 0)
 	BEGIN
@@ -67,9 +67,9 @@
 	END
 
 	-- Create last job step https://docs.microsoft.com/en-us/sql/ssms/agent/create-a-transact-sql-job-step	
-	SET @Command = N'EXEC MyLastSproc';
+	SET @Command = N'Your step 2 sequel here';
 	SET @StepId = 2;
-	SET @StepName = N'MyLastSproc';--gregt lorem ipsum
+	SET @StepName = N'Step 2 name e.g. Lorem ipsum dolor sit amet';
 	EXEC sp_executesql @JobStepExistsSql, N'@Count BIGINT OUTPUT, @StepId INT', @JobStepExists = @Count OUTPUT, @StepId = @StepId
 	IF (@JobStepExists = 0)
 	BEGIN
