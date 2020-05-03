@@ -13,7 +13,7 @@
 	DECLARE @ServerName NVARCHAR(30) = N'(local)';
 	DECLARE @StepId INT;
 	DECLARE @StepName SYSNAME;
-	DECLARE	@Count BIGINT;
+	DECLARE	@Count BIGINT;--gregt rename to @Exists ?
 	DECLARE @JobStepExistsSql NVARCHAR(MAX) = N'SELECT @Count = COUNT(*) FROM msdb.dbo.sysjobs j WITH(NOLOCK) INNER JOIN msdb.dbo.sysjobsteps s WITH(NOLOCK) ON j.job_id = s.job_id WHERE j.[Name] = ''' + @JobName + N''' AND s.step_id = @StepId';
 
 
