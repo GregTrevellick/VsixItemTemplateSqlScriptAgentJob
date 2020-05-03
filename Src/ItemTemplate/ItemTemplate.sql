@@ -6,7 +6,8 @@
 	DECLARE @JobDescription nvarchar(512) =  N'My job description';
 	DECLARE @JobId UNIQUEIDENTIFIER;
 	DECLARE @JobName SYSNAME = N'MyJobName' + '_' + @DatabaseName;
-    DECLARE @OnSuccessAactionGoToNextStep TINYINT = 3;
+    DECLARE @OnSuccessActionGoToNextStep TINYINT = 3;
+    DECLARE @onSuccessActionQuitJobReportingSuccess TINYINT = 1;--gregt check text and value
 	DECLARE @OwnerLoginName SYSNAME = N'sa';
 	DECLARE @ReturnCode INT = 0;
 	DECLARE @ServerName NVARCHAR(30) = N'(local)';
@@ -47,7 +48,7 @@
 				 @Command = @Command
 				,@database_name = @DatabaseName
 				,@job_id = @JobId
-				,@on_success_action = @onSuccessAactionGoToNextStep
+				,@on_success_action = @onSuccessActionGoToNextStep
 				,@step_id = @StepId
 				,@step_name = @StepName
 		IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
@@ -59,7 +60,7 @@
 				 @Command = @Command
 				,@database_name = @DatabaseName
 				,@job_id = @JobId
-				,@on_success_action = @onSuccessAactionGoToNextStep
+				,@on_success_action = @onSuccessActionGoToNextStep
 				,@step_id = @StepId	
 				,@step_name = @StepName
 		IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
@@ -80,6 +81,7 @@
 				 @Command = @Command
 				,@database_name = @DatabaseName
 				,@job_id = @JobId
+				,@on_success_action = @onSuccessActionQuitJobReportingSuccess
 				,@step_id = @StepId
 				,@step_name = @StepName
 		IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
@@ -91,6 +93,7 @@
 				 @Command = @Command
 				,@database_name = @DatabaseName
 				,@job_id = @JobId
+				,@on_success_action = @onSuccessActionQuitJobReportingSuccess
 				,@step_id = @StepId	
 				,@step_name = @StepName
 		IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
