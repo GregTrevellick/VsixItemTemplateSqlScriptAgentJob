@@ -1,32 +1,16 @@
-﻿/*
-   References
-   ==========
-   Create job https://docs.microsoft.com/en-us/sql/ssms/agent/create-a-job
-   Add job https://docs.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/sp-add-job-transact-sql
-   Add target server https://docs.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/sp-add-jobserver-transact-sql
-   Create job step https://docs.microsoft.com/en-us/sql/ssms/agent/create-a-transact-sql-job-step
-   Add job step https://docs.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/sp-add-jobstep-transact-sql
-   Update job step https://docs.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/sp-update-jobstep-transact-sql
-*/
-
-
--- gregt things for you to change
-DECLARE @DatabaseName SYSNAME = N'OverdriveDev';--N'MyDatabase';
-DECLARE @JobDescription nvarchar(512) =  N'Job name e.g. Lorem ipsum dolor sit amet';
-DECLARE @JobName SYSNAME = N'Gregt_Test8';--N'MyJobName' + '_' + @DatabaseName;
-	
-BEGIN TRY  
-
+﻿BEGIN TRY  
 	BEGIN TRANSACTION
 
-		-- Variables  gregt sort alpha
 		DECLARE @Command NVARCHAR(MAX);
+		DECLARE @DatabaseName SYSNAME = N'OverdriveDev';--N'MyDatabase';
+		DECLARE @GoToNextStep TINYINT = 3;
+		DECLARE @JobDescription nvarchar(512) =  N'Job name e.g. Lorem ipsum dolor sit amet';
 		DECLARE @JobId UNIQUEIDENTIFIER;
+		DECLARE @JobName SYSNAME = N'Gregt_Test8';--N'MyJobName' + '_' + @DatabaseName;
 		DECLARE	@JobStepExists BIGINT;
 		DECLARE @JobStepExistsSql NVARCHAR(MAX) = N'SELECT @JobStepExists = COUNT(*) FROM msdb.dbo.sysjobs j WITH(NOLOCK) INNER JOIN msdb.dbo.sysjobsteps s WITH(NOLOCK) ON j.job_id = s.job_id WHERE j.[Name] = ''' + @JobName + N''' AND s.step_id = @StepId';
-		DECLARE @GoToNextStep TINYINT = 3;
-		DECLARE @QuitJobReportingSuccess TINYINT = 1;
 		DECLARE @OwnerLoginName SYSNAME = N'sa';--gregt remove this as a default ?
+		DECLARE @QuitJobReportingSuccess TINYINT = 1;
 		DECLARE @ReturnCode INT = 0;
 		DECLARE @ServerName NVARCHAR(30) = N'(local)';
 		DECLARE @StepId INT;
@@ -96,21 +80,28 @@ BEGIN TRY
 					 @Command = @Command
 					,@database_name = @DatabaseName
 					,@job_id = @JobId
-					,@on_success_action = 9--@QuitJobReportingSuccess
+					,@on_success_action = @QuitJobReportingSuccess
 					,@step_id = @StepId	
 					,@step_name = @StepName
 		END 
-	COMMIT TRANSACTION
 
+	COMMIT TRANSACTION
 END TRY  
 BEGIN CATCH
 	SELECT
-        ERROR_NUMBER() AS ErrorNumber,
-        ERROR_SEVERITY() AS ErrorSeverity,
-        ERROR_STATE() AS ErrorState,
-        ERROR_PROCEDURE() AS ErrorProcedure,
         ERROR_LINE() AS ErrorLine,
         ERROR_MESSAGE() AS ErrorMessage,
-		@@TRANCOUNT AS TranCount
+        ERROR_NUMBER() AS ErrorNumber,
+        ERROR_PROCEDURE() AS ErrorProcedure
 	ROLLBACK TRANSACTION 
-END CATCH;  
+END CATCH;
+
+/*
+ REFERENCES
+ Create job https://docs.microsoft.com/en-us/sql/ssms/agent/create-a-job
+ Add job https://docs.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/sp-add-job-transact-sql
+ Add target server https://docs.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/sp-add-jobserver-transact-sql
+ Create job step https://docs.microsoft.com/en-us/sql/ssms/agent/create-a-transact-sql-job-step
+ Add job step https://docs.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/sp-add-jobstep-transact-sql
+ Update job step https://docs.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/sp-update-jobstep-transact-sql
+*/
