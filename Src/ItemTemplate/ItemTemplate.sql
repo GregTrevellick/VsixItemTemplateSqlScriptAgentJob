@@ -11,17 +11,19 @@
 
 BEGIN TRANSACTION
 
-	-- Variables  gregt sort alpha
-	DECLARE @Command NVARCHAR(MAX);
+	-- gregt things for you to change
 	DECLARE @DatabaseName SYSNAME = N'OverdriveDev';--N'MyDatabase';
 	DECLARE @JobDescription nvarchar(512) =  N'Job name e.g. Lorem ipsum dolor sit amet';
+	DECLARE @JobName SYSNAME = N'Gregt_Test5';--N'MyJobName' + '_' + @DatabaseName;
+
+	-- Variables  gregt sort alpha
+	DECLARE @Command NVARCHAR(MAX);
 	DECLARE @JobId UNIQUEIDENTIFIER;
-	DECLARE @JobName SYSNAME = N'Gregt_Test2';--N'MyJobName' + '_' + @DatabaseName;
 	DECLARE	@JobStepExists BIGINT;
 	DECLARE @JobStepExistsSql NVARCHAR(MAX) = N'SELECT @JobStepExists = COUNT(*) FROM msdb.dbo.sysjobs j WITH(NOLOCK) INNER JOIN msdb.dbo.sysjobsteps s WITH(NOLOCK) ON j.job_id = s.job_id WHERE j.[Name] = ''' + @JobName + N''' AND s.step_id = @StepId';
     DECLARE @GoToNextStep TINYINT = 3;
     DECLARE @QuitJobReportingSuccess TINYINT = 1;
-	DECLARE @OwnerLoginName SYSNAME = N'sa';
+	DECLARE @OwnerLoginName SYSNAME = N'sa';--gregt remove this as a default ?
 	DECLARE @ReturnCode INT = 0;
 	DECLARE @ServerName NVARCHAR(30) = N'(local)';
 	DECLARE @StepId INT;
@@ -49,7 +51,7 @@ BEGIN TRANSACTION
 	/* ADD / UPDATE FIRST JOB STEP */
 	SET @Command = N'/* Your step 1 sequel here */';
 	SET @StepId = 1;
-	SET @StepName = N'Lorem ipsum dolor sit amet';
+	SET @StepName = N'Step 1 Lorem ipsum dolor sit amet';
 	EXEC sp_executesql @JobStepExistsSql, N'@JobStepExists BIGINT OUTPUT, @StepId INT', @JobStepExists = @JobStepExists OUTPUT, @StepId = @StepId
 	IF (@JobStepExists = 0)
 	BEGIN
@@ -77,7 +79,7 @@ BEGIN TRANSACTION
 	/* ADD / UPDATE LAST JOB STEP */
 	SET @Command = N'/* Your step 2 sequel here */';
 	SET @StepId = 2;
-	SET @StepName = N'Lorem ipsum dolor sit amet';
+	SET @StepName = N'Step 2 Lorem ipsum dolor sit amet';
 	EXEC sp_executesql @JobStepExistsSql, N'@JobStepExists BIGINT OUTPUT, @StepId INT', @JobStepExists = @JobStepExists OUTPUT, @StepId = @StepId
 	IF (@JobStepExists = 0)
 	BEGIN
