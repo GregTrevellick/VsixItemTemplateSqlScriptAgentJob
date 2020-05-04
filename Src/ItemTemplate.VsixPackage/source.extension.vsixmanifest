@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="9f34112b-335b-42b7-bf85-32e3a3591307" Version="1.11.15" Language="en-US" Publisher="Greg Trevellick" />
+        <Identity Id="9f34112b-335b-42b7-bf85-32e3a3591307" Version="1.11.16" Language="en-US" Publisher="Greg Trevellick" />
         <DisplayName>SQL Server Agent Job</DisplayName>
         <Description xml:space="preserve">An item template for creating / altering a SQL Server agent job.</Description>
         <MoreInfo>https://github.com/GregTrevellick/VsixItemTemplateSqlScriptAgentJob</MoreInfo>
