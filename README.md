@@ -35,10 +35,10 @@
 [![License](https://img.shields.io/github/license/gittools/gitlink.svg)](/LICENSE.txt)
 [![Subscribe](https://img.shields.io/badge/subscribe%20to%20receive%20notificatons-grey.svg)](https://github.com/GregTrevellick/VsixItemTemplateSqlScriptAgentJob/subscription)
  
-[![Visual Studio Marketplace version](https://img.shields.io/badge/-VsixItemTemplateSqlScriptAgentJob-%23e2165e.svg)](https://marketplace.visualstudio.com/items?itemName=GregTrevellick.VsixItemTemplateSqlScriptAgentJob)
-[![Visual Studio Marketplace downloads](https://vsmarketplacebadge.apphb.com/installs/GregTrevellick.VsixItemTemplateSqlScriptAgentJob.svg)](https://marketplace.visualstudio.com/items?itemName=GregTrevellick.VsixItemTemplateSqlScriptAgentJob)
-[![Visual Studio Marketplace ratings](https://vsmarketplacebadge.apphb.com/rating/GregTrevellick.VsixItemTemplateSqlScriptAgentJob.svg)](https://marketplace.visualstudio.com/items?itemName=GregTrevellick.VsixItemTemplateSqlScriptAgentJob)
-[![Visual Studio Marketplace version](https://vsmarketplacebadge.apphb.com/version/GregTrevellick.VsixItemTemplateSqlScriptAgentJob.svg)](https://marketplace.visualstudio.com/items?itemName=GregTrevellick.VsixItemTemplateSqlScriptAgentJob)
+[![Visual Studio Marketplace version](https://img.shields.io/badge/-ItemTemplateSqlScriptAgentJob-%23e2165e.svg)](https://marketplace.visualstudio.com/items?itemName=GregTrevellick.ItemTemplateSqlScriptAgentJob)
+[![Visual Studio Marketplace downloads](https://vsmarketplacebadge.apphb.com/installs/GregTrevellick.ItemTemplateSqlScriptAgentJob.svg)](https://marketplace.visualstudio.com/items?itemName=GregTrevellick.ItemTemplateSqlScriptAgentJob)
+[![Visual Studio Marketplace ratings](https://vsmarketplacebadge.apphb.com/rating/GregTrevellick.ItemTemplateSqlScriptAgentJob.svg)](https://marketplace.visualstudio.com/items?itemName=GregTrevellick.ItemTemplateSqlScriptAgentJob)
+[![Visual Studio Marketplace version](https://vsmarketplacebadge.apphb.com/version/GregTrevellick.ItemTemplateSqlScriptAgentJob.svg)](https://marketplace.visualstudio.com/items?itemName=GregTrevellick.ItemTemplateSqlScriptAgentJob)
 
 
 
