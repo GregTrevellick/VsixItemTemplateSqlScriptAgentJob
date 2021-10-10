@@ -7,7 +7,7 @@ environment:
     my_encrypted_sonarqube_token:
         secure: auSP7uJIC8Y5I0AW97f0ANIOLXxkszux38+nFJhry4PFvH1MBd1xfBFMcA30a8Z9  
 install:
-    - choco install "sonarscanner-msbuild-netcoreapp2.0" -y
+    - choco install "sonarscanner-msbuild-net50" -y
 before_build:
     - cmd: nuget restore Src/ItemTemplate.sln
     - dotnet tool install -g dotnet-sonarscanner
