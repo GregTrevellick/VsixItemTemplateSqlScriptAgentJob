@@ -4,6 +4,7 @@ branches:
   only:
     - master
 environment:
+    nodejs_version: "12"
     my_encrypted_sonarqube_token:
         secure: auSP7uJIC8Y5I0AW97f0ANIOLXxkszux38+nFJhry4PFvH1MBd1xfBFMcA30a8Z9  
 install:
