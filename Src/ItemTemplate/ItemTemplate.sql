@@ -1,6 +1,4 @@
-﻿/* Changes to this template can be proposed at https://github.com/GregTrevellick/VsixItemTemplateSqlScriptAgentJob/blob/master/Src/ItemTemplate/ItemTemplate.sql */
-
-BEGIN TRY  
+﻿BEGIN TRY  
 	BEGIN TRANSACTION
 
 		DECLARE @Command NVARCHAR(MAX);
